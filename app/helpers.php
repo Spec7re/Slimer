@@ -241,20 +241,24 @@ if (! function_exists('class_basename')) {
 
 if (!function_exists('config'))
 {
-    function config($path = null, $value = null)
+    function config($path = null)
     {
+        $config = [];
+        $folder = scandir(config_path());
+        $config_files = array_slice($folder, 2, count($folder));
 
-        $config = app()->resolve('config');
+        foreach ($config_files as $file)
+        {
+            throw_when(
+                Str::after($file, '.') !== 'php',
+                'Config files must be .php files'
+            );
 
-        if (is_null($value)) {
-            return data_get($config, $path);
+
+            data_set($config, Str::before($file, '.php') , require config_path($file));
         }
 
-        data_set($config, $path, $value);
-
-        var_dump($config);
-
-        app()->bind('config', $config);
+        return data_get($config, $path);
     }
 }
 
