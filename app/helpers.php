@@ -5,15 +5,6 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 /*
- * event
- * old
- * back
- * session
- * validator
- * asset
- * redirect
- * collect
- * factory
  * env
  * base_path
  * config_path
@@ -29,103 +20,6 @@ use Illuminate\Support\Collection;
  * data_get
  * data_set
  */
-
-if (!function_exists('event'))
-{
-    function event() : \Boot\Foundation\Events\Dispatcher
-    {
-        return app()->resolve('events');
-    }
-}
-if (!function_exists('old'))
-{
-    function old($key)
-    {
-        $input = app()->resolve('old_input');
-
-        $field = collect($input)->filter(fn ($value, $field) => $key == $field);
-
-        if (isset($field[$key])) {
-            return $field[$key];
-        }
-    }
-}
-
-if (!function_exists('back'))
-{
-    function back()
-    {
-        $route = app()->resolve(\App\Support\RequestInput::class);
-
-        $back = $route->getCurrentUri();
-
-        return redirect($back);
-    }
-}
-
-if (!function_exists('session'))
-{
-    function session($key = false, $value = false)
-    {
-        $session = app()->resolve(\Boot\Foundation\Http\Session::class);
-
-        if (!$key) {
-            return $session;
-        }
-
-        if (!$value) {
-            return $session->get($key);
-        }
-
-        $session->set($key, $value);
-
-        return $session;
-    }
-}
-
-if (!function_exists('validator'))
-{
-    function validator(array $input, array $rules, array $messages = [])
-    {
-        $factory = app()->resolve(\Boot\Foundation\Http\ValidatorFactory::class);
-
-        return $factory->make($input, $rules, $messages);
-    }
-}
-
-if (!function_exists('asset'))
-{
-    function asset($path)
-    {
-        return env('APP_URL') . "/{$path}";
-    }
-}
-if (!function_exists('redirect'))
-{
-    function redirect(string $to)
-    {
-        $redirect = app()->resolve(\App\Support\Redirect::class);
-
-        return $redirect($to);
-    }
-}
-if (!function_exists('collect'))
-{
-    function collect($items)
-    {
-        return new Collection($items);
-    }
-}
-
-//if (!function_exists('factory'))
-//{
-//    function factory(string $model, int $count = 1)
-//    {
-//        $factory = new Factory;
-//
-//        return $factory($model, $count);
-//    }
-//}
 
 if (!function_exists('env'))
 {

@@ -1,11 +1,9 @@
 <?php
 
-use App\Providers\ServiceProvider;
 use DI\Container;
-use DI\Bridge\Slim\Bridge as SlimAppFactory;
+use DI\Bridge\Slim\Bridge as App;
+use App\Http\HttpKernel;
 
-$app = SlimAppFactory::create(new Container());
+$app = App::create(new Container());
 
-ServiceProvider::setup($app, config('app.providers'));
-
-return $app;
+return HttpKernel::bootstrap($app)->getApplication();
