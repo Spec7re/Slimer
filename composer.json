@@ -10,7 +10,8 @@
         "illuminate/support": "^7.0.0",
         "illuminate/database": "^7.4",
         "zeuxisoo/slim-whoops": "^0.7.2",
-        "vlucas/phpdotenv": "^4.1"
+        "vlucas/phpdotenv": "^4.1",
+        "ext-pdo": "*"
     },
     "autoload": {
         "files": [
