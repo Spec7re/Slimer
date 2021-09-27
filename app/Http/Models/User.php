@@ -2,11 +2,17 @@
 
 namespace App\Http\Models;
 
-class User
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model
 {
-    public function __construct()
-    {
-        $user = "USER Reporting";
-        return  $user ;
-    }
+    protected $table = 'users';
+
+    protected $fillable  = [
+        'first_name', 'last_name', 'email'
+    ];
+
+    protected $guarded = [
+        'password'
+    ];
 }

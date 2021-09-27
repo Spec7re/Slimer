@@ -2,7 +2,6 @@
 
 namespace Boot\Foundation;
 
-use Boot\Foundation\Bootstrappers\Bootstrapper;
 
 class HttpKernel extends Kernel
 {
@@ -23,6 +22,7 @@ class HttpKernel extends Kernel
     public array $bootstrap = [
         Bootstrappers\LoadEnvironmentVariables::class, // First the variables, cause following classes expect them.
         Bootstrappers\LoadDebuggingPage::class,
+        Bootstrappers\LoadAliases::class,
         Bootstrappers\LoadHttpMiddleware::class,
         Bootstrappers\LoadServiceProviders::class,
     ];

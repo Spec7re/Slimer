@@ -11,7 +11,7 @@ use Illuminate\Support\Collection;
  * resources_path
  * public_path
  * routes_path
- * storage_path
+ * database_path
  * app_path
  * dd (die and dump)
  * throw_when
@@ -59,11 +59,11 @@ if (!function_exists('config_path'))
     }
 }
 
-if (!function_exists('storage_path'))
+if (!function_exists('database_path'))
 {
-    function storage_path($path = '')
+    function database_path($path = '')
     {
-        return base_path("storage/{$path}");
+        return base_path("database/{$path}");
     }
 }
 
