@@ -8,11 +8,11 @@ use Slim\Views\PhpRenderer;
 class WelcomeController
 {
 
-    public function index(Response $response) : Response
+    public function index($request, $response): Response
     {
-            $response->getBody()->write('WELCOME CONTROLLER REPORTING');
+        $renderer = new PhpRenderer(resources_path('views'));
 
-            return $response;
+        return $renderer->render($response, "welcome.php");
     }
 
     public function show(Response $response, $name) : Response
@@ -22,10 +22,10 @@ class WelcomeController
            return $response;
     }
 
-    public function home($request, $response): Response
+    public function report(Response $response) : Response
     {
-            $renderer = new PhpRenderer(resources_path('views'));
+        $response->getBody()->write('WELCOME CONTROLLER REPORTING');
 
-            return $renderer->render($response, "index.html");
+        return $response;
     }
 }
