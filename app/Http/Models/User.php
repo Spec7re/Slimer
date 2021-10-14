@@ -13,7 +13,7 @@ class User extends Model
         'first_name', 'last_name', 'email'
     ];
 
-    protected $guarded = [
+    protected $hidden = [
         'password'
     ];
 }

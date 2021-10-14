@@ -3,6 +3,7 @@
 namespace App\Support;
 
 use App\Http\Models\User;
+use Firebase\JWT\JWT;
 
 class Auth
 {
@@ -26,6 +27,10 @@ class Auth
             'password' => $user->password
         ];
 
+        $token = self::token();
+
+        $_SESSION['Authorization'] = $token;
+
         return true;
     }
 
@@ -36,6 +41,8 @@ class Auth
             'email' => null,
             'password' => null,
         ];
+
+        unset($_SESSION['Authorization']);
 
         return self::guest();
     }
@@ -51,6 +58,31 @@ class Auth
         $query = User::where($_SESSION['user']);
 
         return $query->exists() ? $query->first() : false ;
+    }
+
+    public static function token()
+    {
+        $domain = env('APP_DOMAIN');
+        $iat = time();
+        $exp = $iat + 60 * 60;
+
+        $key = env("JWT_SECRET");
+        $payload = array(
+            "iss" => $domain,
+            "aud" => $domain,
+            "iat" => $iat,
+            "exp" => $exp
+        );
+
+        /**
+         * IMPORTANT:
+         * You must specify supported algorithms for your application. See
+         * https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40
+         * for a list of spec-compliant algorithms.
+         */
+        $jwt = JWT::encode($payload, $key);
+
+        return json_encode(['Bearer'=> $jwt, 'expires'=>$exp]);
     }
 
     public static function check() : bool
