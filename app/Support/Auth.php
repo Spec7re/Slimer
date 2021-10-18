@@ -27,7 +27,7 @@ class Auth
             'password' => $user->password
         ];
 
-        $token = self::token();
+        $token = self::token($_SESSION['user']);
 
         $_SESSION['Authorization'] = $token;
 
@@ -60,8 +60,9 @@ class Auth
         return $query->exists() ? $query->first() : false ;
     }
 
-    public static function token()
+    public static function token($user)
     {
+        unset($user['password']);
         $domain = env('APP_DOMAIN');
         $iat = time();
         $exp = $iat + 60 * 60;
@@ -71,7 +72,8 @@ class Auth
             "iss" => $domain,
             "aud" => $domain,
             "iat" => $iat,
-            "exp" => $exp
+            "exp" => $exp,
+            'user' => $user,
         );
 
         /**

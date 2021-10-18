@@ -15,6 +15,7 @@ class ApiAuthMiddleware
         $key = env("JWT_SECRET");
         $domain = env('APP_DOMAIN');
         $audience = '';
+        $user = [];
 
         if ( ! empty($token) ) {
             $token = str_replace( 'Bearer ', '', $token[0]);
@@ -26,10 +27,11 @@ class ApiAuthMiddleware
         if( ! empty($token) ) {
             $decoded = (array) JWT::decode($token, $key, array('HS256'));
             $audience = $decoded['aud'];
+            $user = (array) $decoded['user'];
         }
 
         if ($domain == $audience) {
-            return $handler->handle($request);
+            return $handler->handle($request->withAttribute( 'user', $user));
         } else {
             $response = new Response();
             return $response->withStatus(302)->withHeader('Location', '/home');
