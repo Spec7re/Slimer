@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Support\Auth;
 use Firebase\JWT\JWT;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as Handle;
@@ -15,6 +16,7 @@ class ApiAuthMiddleware
         $key = env("JWT_SECRET");
         $domain = env('APP_DOMAIN');
         $audience = '';
+        $expires = 0;
         $user = [];
 
         if ( ! empty($token) ) {
@@ -26,15 +28,17 @@ class ApiAuthMiddleware
 
         if( ! empty($token) ) {
             $decoded = (array) JWT::decode($token, $key, array('HS256'));
+            $expires = $decoded['exp'];
             $audience = $decoded['aud'];
             $user = (array) $decoded['user'];
         }
 
-        if ($domain == $audience) {
+        if ($domain == $audience && $expires > time()) {
             return $handler->handle($request->withAttribute( 'user', $user));
         } else {
+            Auth::logout();
             $response = new Response();
-            return $response->withStatus(302)->withHeader('Location', '/home');
+            return $response->withStatus(302)->withHeader('Location', '/');
         }
     }
 }

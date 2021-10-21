@@ -47,4 +47,13 @@ class PostController
 
         return $response->withStatus(302)->withHeader('Location', '/api/post');
     }
+
+    public function getPosts($request, $response) : Response
+    {
+        $posts = Post::all();
+
+        $response->getBody()->write(json_encode($posts, JSON_PRETTY_PRINT));
+
+        return $response;
+    }
 }

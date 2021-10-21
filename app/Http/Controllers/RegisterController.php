@@ -19,6 +19,7 @@ class RegisterController
     public function store($request, $response)
     {
         $requestData = $request->getParsedBody();
+//        $requestData = json_decode(file_get_contents('php://input'), true);
 
         if ( ! isset($requestData['email'])) {
             dd('Email is required field for registration.');
