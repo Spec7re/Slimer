@@ -28,7 +28,7 @@ class LoginController
         return $response->withStatus(302)->withHeader('Location', '/home');
     }
 
-        public function logout($response)
+    public function logout($response)
     {
         Auth::logout();
 

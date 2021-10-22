@@ -10,7 +10,7 @@ class Post extends Model
     public $timestamps = true;
 
     protected $fillable  = [
-        'title', 'content',
+        'title', 'body',
     ];
 
     protected $hidden = [];

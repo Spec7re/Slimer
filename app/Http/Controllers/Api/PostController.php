@@ -28,21 +28,36 @@ class PostController
         $loggedUser  = $request->getAttribute('user');
 
         if(empty($loggedUser)) {
-            dd('Only logged users can create posts!');
+            $payload = json_encode([
+                "status" => 'error',
+                "message" => "Only logged users can create posts!"
+            ]);
+            $response->getBody()->write($payload);
+            return $response;
         }
 
         if (empty($requestData['title'])) {
-            dd('Title is required field for posts.');
+            $payload = json_encode([
+                "status" => 'error',
+                "message" => "Title is required field for posts."
+            ]);
+            $response->getBody()->write($payload);
+            return $response;
         }
 
-        if (empty($requestData['text'])) {
-            dd('Content is required field for posts.');
+        if (empty($requestData['body'])) {
+            $payload = json_encode([
+                "status" => 'error',
+                "message" => "Content is required field for posts."
+            ]);
+            $response->getBody()->write($payload);
+            return $response;
         }
 
         $post = new Post();
         $post->user_id = $loggedUser['id'];
         $post->title = $requestData['title'];
-        $post->content = $requestData['text'];
+        $post->body = $requestData['body'];
         $post->save();
 
         return $response->withStatus(302)->withHeader('Location', '/api/post');
@@ -50,7 +65,7 @@ class PostController
 
     public function getPosts($request, $response) : Response
     {
-        $posts = Post::all();
+        $posts = Post::latest('created_at')->get();
 
         $response->getBody()->write(json_encode($posts, JSON_PRETTY_PRINT));
 
