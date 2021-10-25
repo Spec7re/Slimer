@@ -2375,6 +2375,7 @@ __webpack_require__.r(__webpack_exports__);
           alert(responseData.message);
         } else if ("success" === responseData.status) {
           alert(responseData.message);
+          window.location.href = '/home';
         }
       });
       this.clearForm();

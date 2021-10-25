@@ -64,6 +64,6 @@ class RegisterController
             "message" => "User created!"
             ]);
         $response->getBody()->write($payload);
-        return $response->withStatus(302)->withHeader('Location', '/home');
+        return $response;
     }
 }
