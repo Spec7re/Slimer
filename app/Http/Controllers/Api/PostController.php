@@ -24,7 +24,7 @@ class PostController
 
     public function store($request, $response): Response
     {
-        $requestData = $request->getParsedBody();
+        $requestData = json_decode(file_get_contents('php://input'), true);
         $loggedUser  = $request->getAttribute('user');
 
         if(empty($loggedUser)) {
@@ -60,7 +60,12 @@ class PostController
         $post->body = $requestData['body'];
         $post->save();
 
-        return $response->withStatus(302)->withHeader('Location', '/api/post');
+        $payload = json_encode([
+            "status" => 'success',
+            "message" => "Post created!"
+        ]);
+        $response->getBody()->write($payload);
+        return $response;
     }
 
     public function getPosts($request, $response) : Response

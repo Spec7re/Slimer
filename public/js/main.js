@@ -2264,8 +2264,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Login",
@@ -2292,6 +2290,7 @@ __webpack_require__.r(__webpack_exports__);
           alert(responseData.message);
         } else if ("success" === responseData.status) {
           alert(responseData.message);
+          window.location.href = '/home';
         }
       });
       this.clearForm();
@@ -2422,8 +2421,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostForm",
@@ -2434,7 +2431,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    login: function login() {
+    createPost: function createPost() {
       // Send a POST request
       axios__WEBPACK_IMPORTED_MODULE_0___default()({
         method: 'POST',
@@ -2450,6 +2447,7 @@ __webpack_require__.r(__webpack_exports__);
           alert(responseData.message);
         } else if ("success" === responseData.status) {
           alert(responseData.message);
+          window.location.href = '/api/post';
         }
       });
       this.clearForm();
@@ -3142,66 +3140,73 @@ var render = function() {
     [
       _vm._m(0),
       _vm._v(" "),
-      _c("form", { attrs: { action: "/login", method: "POST" } }, [
-        _c("div", { staticClass: "mb-4" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.email,
-                expression: "email"
-              }
-            ],
-            staticClass: "form-control form-control-lg",
-            attrs: {
-              type: "text",
-              name: "email",
-              placeholder: "Email",
-              "aria-label": ".form-control-lg example"
-            },
-            domProps: { value: _vm.email },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.email = $event.target.value
-              }
+      _c("div", { staticClass: "mb-4" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.email,
+              expression: "email"
             }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "mb-4" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.password,
-                expression: "password"
+          ],
+          staticClass: "form-control form-control-lg",
+          attrs: {
+            type: "text",
+            name: "email",
+            placeholder: "Email",
+            "aria-label": ".form-control-lg example"
+          },
+          domProps: { value: _vm.email },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
               }
-            ],
-            staticClass: "form-control form-control-lg",
-            attrs: {
-              type: "password",
-              name: "password",
-              placeholder: "Password",
-              "aria-label": ".form-control-lg example"
-            },
-            domProps: { value: _vm.password },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.password = $event.target.value
-              }
+              _vm.email = $event.target.value
             }
-          })
-        ]),
-        _vm._v(" "),
-        _vm._m(1)
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "mb-4" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.password,
+              expression: "password"
+            }
+          ],
+          staticClass: "form-control form-control-lg",
+          attrs: {
+            type: "password",
+            name: "password",
+            placeholder: "Password",
+            "aria-label": ".form-control-lg example"
+          },
+          domProps: { value: _vm.password },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.password = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "text-center" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary pl-5 pr-5 mt-2",
+            on: { click: _vm.login }
+          },
+          [_vm._v("Login")]
+        )
       ])
     ]
   )
@@ -3213,21 +3218,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "text-center" }, [
       _c("h1", { staticClass: "mt-3 mb-3" }, [_vm._v("Login")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "text-center" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary pl-5 pr-5 mt-2",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("Login")]
-      )
     ])
   }
 ]
@@ -3457,67 +3447,74 @@ var render = function() {
     [
       _vm._m(0),
       _vm._v(" "),
-      _c("form", { attrs: { action: "/api/post", method: "POST" } }, [
-        _c("div", { staticClass: "mb-4" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.title,
-                expression: "title"
-              }
-            ],
-            staticClass: "form-control form-control-lg",
-            attrs: {
-              type: "text",
-              name: "title",
-              placeholder: "Title",
-              "aria-label": ".form-control-lg example"
-            },
-            domProps: { value: _vm.title },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.title = $event.target.value
-              }
+      _c("div", { staticClass: "mb-4" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.title,
+              expression: "title"
             }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "mb-4" }, [
-          _c("textarea", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.body,
-                expression: "body"
+          ],
+          staticClass: "form-control form-control-lg",
+          attrs: {
+            type: "text",
+            name: "title",
+            placeholder: "Title",
+            "aria-label": ".form-control-lg example"
+          },
+          domProps: { value: _vm.title },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
               }
-            ],
-            staticClass: "form-control form-control-lg",
-            attrs: {
-              placeholder: "Content",
-              name: "body",
-              cols: "50",
-              rows: "10",
-              "aria-label": ".form-control-lg example"
-            },
-            domProps: { value: _vm.body },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.body = $event.target.value
-              }
+              _vm.title = $event.target.value
             }
-          })
-        ]),
-        _vm._v(" "),
-        _vm._m(1)
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "mb-4" }, [
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.body,
+              expression: "body"
+            }
+          ],
+          staticClass: "form-control form-control-lg",
+          attrs: {
+            placeholder: "Content",
+            name: "body",
+            cols: "50",
+            rows: "10",
+            "aria-label": ".form-control-lg example"
+          },
+          domProps: { value: _vm.body },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.body = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "text-center" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary pl-5 pr-5 mt-2",
+            on: { click: _vm.createPost }
+          },
+          [_vm._v("Create post")]
+        )
       ])
     ]
   )
@@ -3529,21 +3526,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "text-center" }, [
       _c("h1", { staticClass: "mt-3 mb-3" }, [_vm._v("Create new post")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "text-center" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary pl-5 pr-5 mt-2",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("Create post")]
-      )
     ])
   }
 ]
