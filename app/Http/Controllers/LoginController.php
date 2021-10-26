@@ -24,7 +24,7 @@ class LoginController
         if ( ! $successful ) {
             $payload = json_encode([
                 "status" => 'error',
-                "message" => "Authentication failed!"
+                "message" => "Incorrect email or password!"
             ]);
             $response->getBody()->write($payload);
             return $response;

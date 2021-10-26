@@ -18,7 +18,7 @@ class Auth
         $user = $user->first();
 
         if ($password !== $user->password) {
-            dd('Not the proper password, we retry login.');
+           return false;
         }
 
         $_SESSION['user'] = [
@@ -60,6 +60,16 @@ class Auth
         return $query->exists() ? $query->first() : false ;
     }
 
+    public static function check() : bool
+    {
+        return (bool) self::user();
+    }
+
+    public static function guest() : bool
+    {
+        return (bool) self::check() === false;
+    }
+
     public static function token($user)
     {
         unset($user['password']);
@@ -86,15 +96,4 @@ class Auth
 
         return json_encode(['Bearer'=> $jwt, 'expires'=>$exp]);
     }
-
-    public static function check() : bool
-    {
-        return (bool) self::user();
-    }
-
-    public static function guest() : bool
-    {
-        return (bool) self::check() === false;
-    }
-
 }
