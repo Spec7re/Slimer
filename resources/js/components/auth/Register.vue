@@ -1,6 +1,6 @@
 <template>
 
-    <div class="col-6 shadow p-3 mb-5 bg-white rounded p-4 m-auto mt-lg-5">
+    <form @submit.prevent="register" class="col-6 shadow p-3 mb-5 bg-white rounded p-4 m-auto mt-lg-5">
       <div class="text-center">
         <h1 class="mt-3 mb-3">Register</h1>
       </div>
@@ -20,9 +20,9 @@
         <input class="form-control form-control-lg" v-model="confirmPassword" type="password" placeholder="Confirm Password" aria-label=".form-control-lg example" required>
       </div>
       <div class="text-center">
-        <button class="btn btn-primary pl-5 pr-5 mt-2" @click="register">Register</button>
+        <button class="btn btn-primary pl-5 pr-5 mt-2">Register</button>
       </div>
-    </div>
+    </form>
 
 </template>
 

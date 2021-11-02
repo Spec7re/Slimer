@@ -1,6 +1,6 @@
 <template>
 
-  <div class="col-8  shadow p-3 mb-5 bg-white rounded p-4 m-auto mt-lg-5">
+  <form @submit.prevent="createPost" class="col-8  shadow p-3 mb-5 bg-white rounded p-4 m-auto mt-lg-5">
     <div class="text-center">
       <h1 class="mt-3 mb-3">Create new post</h1>
     </div>
@@ -11,9 +11,9 @@
       <textarea class="form-control form-control-lg" v-model="body" placeholder="Content" name="body" cols="50" rows="10" aria-label=".form-control-lg example"></textarea>
     </div>
     <div class="text-center">
-      <button class="btn btn-primary pl-5 pr-5 mt-2" @click="createPost">Create post</button>
+      <button class="btn btn-primary pl-5 pr-5 mt-2">Create post</button>
     </div>
-  </div>
+  </form>
 
 </template>
 

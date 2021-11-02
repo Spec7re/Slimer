@@ -1,6 +1,6 @@
 <template>
 
-  <div class="col-6  shadow p-3 mb-5 bg-white rounded p-4 m-auto mt-lg-5">
+  <form @submit.prevent="login" class="col-6  shadow p-3 mb-5 bg-white rounded p-4 m-auto mt-lg-5">
     <div class="text-center">
       <h1 class="mt-3 mb-3">Login</h1>
     </div>
@@ -11,9 +11,9 @@
       <input class="form-control form-control-lg" v-model="password" type="password" name="password" placeholder="Password" aria-label=".form-control-lg example">
     </div>
     <div class="text-center">
-      <button class="btn btn-primary pl-5 pr-5 mt-2" @click="login">Login</button>
+      <button class="btn btn-primary pl-5 pr-5 mt-2">Login</button>
     </div>
-  </div>
+  </form>
 
 </template>
 
@@ -29,7 +29,7 @@ export default {
     };
   },
   methods: {
-    login() {
+    async login() {
       // Send a POST request
       axios({
         method: 'POST',
