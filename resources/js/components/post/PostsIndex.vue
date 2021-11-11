@@ -4,7 +4,7 @@
     <main role="main">
       <div class="text-center mb-lg-2">
         <h1 class="cover-heading">Posts</h1>
-        <a href="/api/post-form" class="btn btn-primary pl-5 pr-5 mt-2 col-12" type="submit">Create post</a>
+        <a @click="redirect" class="btn btn-primary pl-5 pr-5 mt-2 col-12" type="submit">Create post</a>
         <hr>
       </div>
       <div class="row">
@@ -54,9 +54,21 @@
           ]
         }
       },
-    mounted () {
+    methods:{
+      redirect() {
+        this.$router.push('/post-form');
+      }
+    },
+    created() {
+      let token = this.$store.state.token;
+
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      }
+
       axios
-          .get('/api/get-posts')
+          .get('/api/get-posts',  { headers })
           .then(response => (
               this.posts = response.data
           )).finally(() => this.loading = false)

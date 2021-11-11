@@ -20,7 +20,7 @@ class ApiAuthMiddleware
         $user = [];
 
         if ( ! empty($token) ) {
-            $token = str_replace( 'Bearer ', '', $token[0]);
+            $token = str_replace( 'Bearer ', '', $token);
         } elseif ( isset($_SESSION['Authorization']) ) {
             $sessionToken = json_decode($_SESSION["Authorization"], true);
             $token = $sessionToken['Bearer'];

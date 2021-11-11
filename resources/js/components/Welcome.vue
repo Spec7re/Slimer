@@ -7,7 +7,7 @@
       </p>
       <div class="text-center">
         <p class="lead">
-          <a href="/register" class="btn btn-lg btn-secondary">REGISTER</a>
+          <a @click="redirect" class="btn btn-lg btn-secondary">REGISTER</a>
         </p>
       </div>
     </main>
@@ -15,9 +15,14 @@
 </template>
 
 <script>
-export default {
-  name: "Welcome"
-}
+  export default {
+    name: "Welcome",
+    methods: {
+      redirect() {
+        this.$router.push("/register");
+      }
+    }
+  }
 </script>
 
 <style scoped>
