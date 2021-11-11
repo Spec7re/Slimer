@@ -1,14 +1,16 @@
 <template>
   <div>
-      <register><!-- Register component --></register>
+    <navbar></navbar>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-  import RegisterComponent from "./auth/Register.vue";
+  import Navbar from "./template/Navbar";
   export default {
+    name: "App",
     components: {
-      'register' : RegisterComponent,
-    }
+      'navbar': Navbar,
+    },
   }
 </script>

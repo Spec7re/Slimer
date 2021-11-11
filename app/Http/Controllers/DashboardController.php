@@ -10,6 +10,8 @@ class DashboardController
 {
     public function show($request, $response): Response
     {
+
+        return $response->withStatus(200);
         $user = Auth::user();
 
         if ($user) {

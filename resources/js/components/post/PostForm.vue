@@ -38,13 +38,13 @@ export default {
           title: this.title,
           body: this.body,
         }
-      }).then(function (response) {
+      }).then( (response) => {
         let responseData = response.data;
         if ( "error" === responseData.status ){
           alert(responseData.message);
         } else if ("success" === responseData.status) {
           alert(responseData.message)
-          window.location.href = '/api/post';
+          this.$router.push('/post')
         }
       });
       this.clearForm();

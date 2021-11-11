@@ -31,7 +31,7 @@ class Auth
 
         $_SESSION['Authorization'] = $token;
 
-        return true;
+        return $token;
     }
 
     public static function logout()

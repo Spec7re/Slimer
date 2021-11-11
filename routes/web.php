@@ -8,11 +8,15 @@ Route::get('/', 'WelcomeController@index');
 Route::get('/report', 'WelcomeController@report')->add(RedirectIfGuest::class);
 Route::get('/welcome/{name}', 'WelcomeController@show');
 
-Route::get('/login', 'LoginController@show')->add(RedirectIfAuthenticated::class);
-Route::post('/login', 'LoginController@store')->add(RedirectIfAuthenticated::class);
+Route::get('/login', 'LoginController@show');
+Route::post('/login', 'LoginController@store');
 Route::get('/logout', 'LoginController@logout')->add(RedirectIfGuest::class);
 
 Route::get('/home', 'DashboardController@show')->add(RedirectIfGuest::class);
 
-Route::get('/register', 'RegisterController@show')->add(RedirectIfAuthenticated::class);
-Route::post('/register', 'RegisterController@store')->add(RedirectIfAuthenticated::class);
+Route::get('/register', 'RegisterController@show');
+Route::post('/register', 'RegisterController@store');
+
+// POST views
+Route::get('/post', 'Api\PostController@index');
+Route::get('/post-form', 'Api\PostController@show');

@@ -1,21 +1,53 @@
 import Vue from "vue";
+import Vuex from "vuex"
+import VueRouter from "vue-router";
+
 import App from "./components/App";
-import RegisterComponent from "./components/auth/Register.vue";
+import Welcome from "./components/Welcome";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register.vue";
+import Dashboard from "./components/user/Dashboard";
 import PostsIndex from "./components/post/PostsIndex";
 import PostForm from "./components/post/PostForm";
-import Login from "./components/auth/Login";
-import Dashboard from "./components/user/Dashboard";
-import Welcome from "./components/Welcome";
 
+Vue.use(Vuex)
 
-Vue.component('welcome', Welcome);
-Vue.component('register', RegisterComponent);
-Vue.component('login', Login)
-Vue.component('dashboard', Dashboard)
-Vue.component('post-index', PostsIndex);
-Vue.component('post-form', PostForm)
+const store = new Vuex.Store({
+    state: {
+        loggedIn: false,
+        token: '',
+    },
+    mutations: {
+        login(state, value) {
+            state.loggedIn = value;
+        },
+        setToken(state, value) {
+            state.token = value;
+        }
+    }
+})
+
+Vue.use(VueRouter)
+
+const routes = [
+    { path: '/login', component: Login },
+    { path: '/welcome', component: Welcome },
+    { path: '/register', component: Register },
+    { path: '/home', component: Dashboard },
+    { path: '/post', component: PostsIndex },
+    { path: '/post-form', component: PostForm },
+
+    { path: '*', component: Welcome },
+]
+
+const router = new VueRouter({
+    mode: 'history',
+    routes // short for `routes: routes`
+})
 
 let app = new Vue ({
     el: '#app',
-    // render: h => h(App)
+    store,
+    router,
+    render: h => h(App)
 });

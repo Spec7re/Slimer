@@ -9,9 +9,10 @@ class LoginController
 {
     public function show($response)
     {
-        $renderer = new PhpRenderer(resources_path('views/auth'));
-
-        return $renderer->render($response, "login.php");
+        return $response->withStatus(200);
+//        $renderer = new PhpRenderer(resources_path('views/auth'));
+//
+//        return $renderer->render($response, "login.php");
     }
 
     public function store($request, $response)
@@ -20,8 +21,8 @@ class LoginController
         $email = $requestData['email'];
         $password = sha1($requestData['password']);
 
-        $successful = Auth::attempt($email, $password);
-        if ( ! $successful ) {
+        $getToken = Auth::attempt($email, $password);
+        if ( ! $getToken ) {
             $payload = json_encode([
                 "status" => 'error',
                 "message" => "Incorrect email or password!"
@@ -32,7 +33,8 @@ class LoginController
 
         $payload = json_encode([
             "status" => 'success',
-            "message" => "User logged in successfully!"
+            "message" => "User logged in successfully!",
+            "data" => $getToken
         ]);
         $response->getBody()->write($payload);
         return $response;

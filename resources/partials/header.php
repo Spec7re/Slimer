@@ -1,4 +1,3 @@
-<?php use App\Support\Auth; ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -9,28 +8,5 @@
     </head>
     <body class="d-flex flex-column min-vh-100">
         <!-- NAVIGATION BAR -->
-        <div id="app" class="container">
-            <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                    <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-                    <span class="fs-4">Delta</span>
-                </a>
-                <ul class="nav nav-pills">
-                    <?php if (Auth::user()): ?>
-                    <li class="nav-item"><a href="/home" class="nav-link" aria-current="page">Home</a></li>
-                    <li class="nav-item"><a href="/api/post" class="nav-link">Posts</a></li>
-                    <?php endif; ?>
-                    <?php if (Auth::guest()): ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/register">Register</a>
-                        </li>
-                    <?php else: ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/logout">Logout</a>
-                        </li>
-                    <?php endif; ?>
-                </ul>
-            </header>
+        <div class="container">
+            <div id="app">

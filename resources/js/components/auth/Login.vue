@@ -38,18 +38,21 @@ export default {
           email: this.email,
           password: this.password,
         }
-      }).then(function (response) {
+      }).then( (response) => {
         let responseData = response.data;
         if ( "error" === responseData.status ){
           alert(responseData.message);
         } else if ("success" === responseData.status) {
-          alert(responseData.message)
-          window.location.href = '/home';
+          this.$store.commit('setToken', JSON.parse(responseData.data).Bearer );
+          this.$store.commit('login', true);
         }
       });
       this.clearForm();
+      this.redirect();
     },
-
+    redirect(){
+      this.$router.push('/home');
+    },
     clearForm() {
       this.email = '';
       this.password = '';
