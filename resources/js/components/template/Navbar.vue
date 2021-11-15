@@ -59,7 +59,7 @@
         this.redirect();
       },
       redirect() {
-        this.$router.push("/").catch(()=>{});
+        this.$router.push("/");
       },
     },
     computed: {

@@ -2484,15 +2484,18 @@ __webpack_require__.r(__webpack_exports__);
     createPost: function createPost() {
       var _this = this;
 
-      // Send a POST request
-      axios__WEBPACK_IMPORTED_MODULE_0___default()({
-        method: 'POST',
-        url: '/api/post',
-        data: {
-          title: this.title,
-          body: this.body
+      var token = this.$store.state.token;
+      var options = {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
         }
-      }).then(function (response) {
+      }; // Send a POST request
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/post', {
+        title: this.title,
+        body: this.body
+      }, options).then(function (response) {
         var responseData = response.data;
 
         if ("error" === responseData.status) {
@@ -2676,7 +2679,7 @@ __webpack_require__.r(__webpack_exports__);
       this.redirect();
     },
     redirect: function redirect() {
-      this.$router.push("/")["catch"](function () {});
+      this.$router.push("/");
     }
   },
   computed: {
