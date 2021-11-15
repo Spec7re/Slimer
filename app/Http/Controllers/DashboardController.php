@@ -10,19 +10,7 @@ class DashboardController
 {
     public function show($request, $response): Response
     {
-
         return $response->withStatus(200);
-        $user = Auth::user();
-
-        if ($user) {
-            $renderer = new PhpRenderer(resources_path('views/dashboard'));
-
-            return $renderer->render($response, "dashboard.php");
-        }
-
-        $renderer = new PhpRenderer(resources_path('views'));
-
-        return $renderer->render($response, "welcome.php");
     }
 
     public function store($request, $response)
