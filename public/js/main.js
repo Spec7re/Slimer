@@ -2676,17 +2676,13 @@ __webpack_require__.r(__webpack_exports__);
       this.redirect();
     },
     redirect: function redirect() {
-      this.$router.push("/")["catch"](function () {});
+      this.$router.push("/");
     }
   },
   computed: {
     loggedIn: function loggedIn() {
       return this.$store.state.loggedIn;
     }
-  },
-  mounted: function mounted() {
-    console.log('LOGGED', this.$store.state.loggedIn);
-    console.log('TOKEN', this.$store.state.token);
   }
 });
 

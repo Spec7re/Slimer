@@ -59,7 +59,7 @@
         this.redirect();
       },
       redirect() {
-        this.$router.push("/").catch(()=>{});
+        this.$router.push("/");
       },
     },
     computed: {
@@ -67,10 +67,6 @@
         return this.$store.state.loggedIn;
       }
     },
-    mounted() {
-      console.log('LOGGED', this.$store.state.loggedIn)
-      console.log('TOKEN', this.$store.state.token)
-    }
   }
 </script>
 
