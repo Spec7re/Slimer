@@ -1,11 +1,9 @@
 <?php
 
 use App\Support\Route;
-use App\Http\Middleware\RedirectIfAuthenticatedMiddleware as RedirectIfAuthenticated;
-use App\Http\Middleware\RedirectIfGuestMiddleware as RedirectIfGuest;
 
 Route::get('/', 'WelcomeController@index');
-Route::get('/report', 'WelcomeController@report')->add(RedirectIfGuest::class);
+Route::get('/report', 'WelcomeController@report');
 Route::get('/welcome/{name}', 'WelcomeController@show');
 
 Route::get('/login', 'LoginController@show');
