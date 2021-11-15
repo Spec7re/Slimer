@@ -10,9 +10,6 @@ class LoginController
     public function show($response)
     {
         return $response->withStatus(200);
-//        $renderer = new PhpRenderer(resources_path('views/auth'));
-//
-//        return $renderer->render($response, "login.php");
     }
 
     public function store($request, $response)
@@ -42,10 +39,6 @@ class LoginController
 
     public function logout($response)
     {
-        Auth::logout();
-
-        if (Auth::guest()) {
-            return $response->withStatus(302)->withHeader('Location', '/login');
-        }
+        return $response->withStatus(200);
     }
 }
