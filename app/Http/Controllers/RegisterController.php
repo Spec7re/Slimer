@@ -11,11 +11,7 @@ class RegisterController
 {
     public function show($response): Response
     {
-
         return $response->withStatus(200);
-//        $renderer = new PhpRenderer(resources_path('views/auth'));
-//
-//        return $renderer->render($response, "register.php");
     }
 
     public function store($response)

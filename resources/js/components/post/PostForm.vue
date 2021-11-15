@@ -30,15 +30,19 @@ export default {
   },
   methods: {
     createPost() {
+      let token = this.$store.state.token;
+      const options = {
+        headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+        }
+      }
       // Send a POST request
-      axios({
-        method: 'POST',
-        url: '/api/post',
-        data: {
+      axios.post('/api/post',
+         {
           title: this.title,
           body: this.body,
-        }
-      }).then( (response) => {
+        }, options).then( (response) => {
         let responseData = response.data;
         if ( "error" === responseData.status ){
           alert(responseData.message);

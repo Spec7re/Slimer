@@ -10,20 +10,12 @@ class PostController
 {
     public function index($request, $response): Response
     {
-//        $renderer = new PhpRenderer(resources_path('views/post'));
-
         return $response->withStatus(200);
-//        $renderer = new PhpRenderer(resources_path('views/post'));
-//
-//        return $renderer->render($response, "post-index.php");
     }
 
     public function show($request, $response): Response
     {
         return $response->withStatus(200);
-        $renderer = new PhpRenderer(resources_path('views/post'));
-
-        return $renderer->render($response, "post-form.php");
     }
 
     public function store($request, $response): Response
