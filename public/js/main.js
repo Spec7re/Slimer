@@ -2323,17 +2323,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   if ("error" === responseData.status) {
                     alert(responseData.message);
                   } else if ("success" === responseData.status) {
+                    alert(responseData.message);
+
                     _this.$store.commit('setToken', JSON.parse(responseData.data).Bearer);
 
                     _this.$store.commit('login', true);
+
+                    _this.redirect();
                   }
                 });
 
                 _this.clearForm();
 
-                _this.redirect();
-
-              case 3:
+              case 2:
               case "end":
                 return _context.stop();
             }

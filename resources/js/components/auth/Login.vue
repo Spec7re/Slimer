@@ -43,12 +43,13 @@ export default {
         if ( "error" === responseData.status ){
           alert(responseData.message);
         } else if ("success" === responseData.status) {
+          alert(responseData.message);
           this.$store.commit('setToken', JSON.parse(responseData.data).Bearer );
           this.$store.commit('login', true);
+          this.redirect();
         }
       });
       this.clearForm();
-      this.redirect();
     },
     redirect(){
       this.$router.push('/home');

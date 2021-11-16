@@ -30,7 +30,7 @@ class LoginController
 
         $payload = json_encode([
             "status" => 'success',
-            "message" => "User logged in successfully!",
+            "message" => "Logged in successfully!",
             "data" => $getToken
         ]);
         $response->getBody()->write($payload);
