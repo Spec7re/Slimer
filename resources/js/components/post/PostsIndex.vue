@@ -67,9 +67,11 @@
         'Authorization': 'Bearer ' + token
       }
 
-      axios
-          .get('/api/get-posts',  { headers })
-          .then(response => (
+      axios({
+        url: "/api/get-posts",
+        method: 'GET',
+        headers: headers,
+      }).then( response => (
               this.posts = response.data
           )).finally(() => this.loading = false)
     }

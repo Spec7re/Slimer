@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Support\Auth;
 use Firebase\JWT\JWT;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as Handle;
@@ -36,7 +35,6 @@ class ApiAuthMiddleware
         if ($domain == $audience && $expires > time()) {
             return $handler->handle($request->withAttribute( 'user', $user));
         } else {
-            Auth::logout();
             $response = new Response();
             return $response->withStatus(302)->withHeader('Location', '/');
         }

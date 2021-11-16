@@ -2487,17 +2487,20 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var token = this.$store.state.token;
-      var options = {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + token
-        }
+      var headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
       }; // Send a POST request
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/post', {
-        title: this.title,
-        body: this.body
-      }, options).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        url: '/api/post',
+        method: 'POST',
+        headers: headers,
+        data: {
+          title: this.title,
+          body: this.body
+        }
+      }).then(function (response) {
         var responseData = response.data;
 
         if ("error" === responseData.status) {
@@ -2601,7 +2604,9 @@ __webpack_require__.r(__webpack_exports__);
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token
     };
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/get-posts', {
+    axios__WEBPACK_IMPORTED_MODULE_0___default()({
+      url: "/api/get-posts",
+      method: 'GET',
       headers: headers
     }).then(function (response) {
       return _this.posts = response.data;
