@@ -4074,7 +4074,8 @@ var render = function() {
             type: "text",
             name: "email",
             placeholder: "Email",
-            "aria-label": ".form-control-lg example"
+            "aria-label": ".form-control-lg example",
+            required: ""
           },
           domProps: { value: _vm.email },
           on: {
@@ -4103,7 +4104,8 @@ var render = function() {
             type: "password",
             name: "password",
             placeholder: "Password",
-            "aria-label": ".form-control-lg example"
+            "aria-label": ".form-control-lg example",
+            required: ""
           },
           domProps: { value: _vm.password },
           on: {
@@ -4189,7 +4191,7 @@ var render = function() {
           staticClass: "form-control form-control-lg",
           attrs: {
             type: "text",
-            placeholder: "First Name",
+            placeholder: "First Name*",
             "aria-label": ".form-control-lg example",
             required: ""
           },
@@ -4218,7 +4220,7 @@ var render = function() {
           staticClass: "form-control form-control-lg",
           attrs: {
             type: "text",
-            placeholder: "Last Name",
+            placeholder: "Last Name*",
             "aria-label": ".form-control-lg example",
             required: ""
           },
@@ -4247,7 +4249,7 @@ var render = function() {
           staticClass: "form-control form-control-lg",
           attrs: {
             type: "text",
-            placeholder: "Email",
+            placeholder: "Email*",
             "aria-label": ".form-control-lg example",
             required: ""
           },
@@ -4276,7 +4278,7 @@ var render = function() {
           staticClass: "form-control form-control-lg",
           attrs: {
             type: "password",
-            placeholder: "Password",
+            placeholder: "Password*",
             "aria-label": ".form-control-lg example",
             required: ""
           },
@@ -4305,7 +4307,7 @@ var render = function() {
           staticClass: "form-control form-control-lg",
           attrs: {
             type: "password",
-            placeholder: "Confirm Password",
+            placeholder: "Confirm Password*",
             "aria-label": ".form-control-lg example",
             required: ""
           },

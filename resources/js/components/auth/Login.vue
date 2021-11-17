@@ -5,10 +5,10 @@
       <h1 class="mt-3 mb-3">Login</h1>
     </div>
     <div class="mb-4">
-      <input class="form-control form-control-lg" v-model="email" type="text" name="email" placeholder="Email" aria-label=".form-control-lg example">
+      <input class="form-control form-control-lg" v-model="email" type="text" name="email" placeholder="Email" aria-label=".form-control-lg example" required>
     </div>
     <div class="mb-4">
-      <input class="form-control form-control-lg" v-model="password" type="password" name="password" placeholder="Password" aria-label=".form-control-lg example">
+      <input class="form-control form-control-lg" v-model="password" type="password" name="password" placeholder="Password" aria-label=".form-control-lg example" required>
     </div>
     <div class="text-center">
       <button class="btn btn-primary pl-5 pr-5 mt-2">Login</button>

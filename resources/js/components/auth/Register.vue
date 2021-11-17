@@ -5,19 +5,19 @@
         <h1 class="mt-3 mb-3">Register</h1>
       </div>
       <div class="mb-4">
-        <input class="form-control form-control-lg" v-model="firstName" type="text" placeholder="First Name" aria-label=".form-control-lg example" required>
+        <input class="form-control form-control-lg" v-model="firstName" type="text" placeholder="First Name*" aria-label=".form-control-lg example" required>
       </div>
       <div class="mb-4">
-        <input class="form-control form-control-lg" v-model="lastName" type="text" placeholder="Last Name" aria-label=".form-control-lg example" required>
+        <input class="form-control form-control-lg" v-model="lastName" type="text" placeholder="Last Name*" aria-label=".form-control-lg example" required>
       </div>
       <div class="mb-4">
-        <input class="form-control form-control-lg" v-model="email" type="text" placeholder="Email" aria-label=".form-control-lg example" required>
+        <input class="form-control form-control-lg" v-model="email" type="text" placeholder="Email*" aria-label=".form-control-lg example" required>
       </div>
       <div class="mb-4">
-        <input class="form-control form-control-lg" v-model="password" type="password" placeholder="Password" aria-label=".form-control-lg example" required>
+        <input class="form-control form-control-lg" v-model="password" type="password" placeholder="Password*" aria-label=".form-control-lg example" required>
       </div>
       <div class="mb-4">
-        <input class="form-control form-control-lg" v-model="confirmPassword" type="password" placeholder="Confirm Password" aria-label=".form-control-lg example" required>
+        <input class="form-control form-control-lg" v-model="confirmPassword" type="password" placeholder="Confirm Password*" aria-label=".form-control-lg example" required>
       </div>
       <div class="text-center">
         <button class="btn btn-primary pl-5 pr-5 mt-2">Register</button>
