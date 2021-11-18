@@ -1,6 +1,4 @@
 
-            </div> <!-- Closing Main App tag -->
-        </div> <!-- Closing Container tag -->
         <footer class=" container bg-light text-center text-lg-start mt-auto">
             <!-- Copyright -->
             <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">

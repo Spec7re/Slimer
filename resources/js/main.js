@@ -31,7 +31,7 @@ Vue.use(VueRouter)
 
 const routes = [
     { path: '/login', component: Login },
-    { path: '/welcome', component: Welcome },
+    { path: '/', component: Welcome },
     { path: '/register', component: Register },
     { path: '/home', component: Dashboard },
     { path: '/post', component: PostsIndex },

@@ -7,6 +7,3 @@
         <link rel="shortcut icon" href="#" />
     </head>
     <body class="d-flex flex-column min-vh-100">
-        <!-- NAVIGATION BAR -->
-        <div class="container">
-            <div id="app">

@@ -21987,7 +21987,7 @@ var routes = [{
   path: '/login',
   component: _components_auth_Login__WEBPACK_IMPORTED_MODULE_5__["default"]
 }, {
-  path: '/welcome',
+  path: '/',
   component: _components_Welcome__WEBPACK_IMPORTED_MODULE_4__["default"]
 }, {
   path: '/register',
