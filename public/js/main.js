@@ -22003,7 +22003,7 @@ var routes = [{
   component: _components_post_PostForm__WEBPACK_IMPORTED_MODULE_9__["default"]
 }, {
   path: '*',
-  component: _components_Welcome__WEBPACK_IMPORTED_MODULE_4__["default"]
+  redirect: '/'
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
   mode: 'history',

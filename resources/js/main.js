@@ -37,7 +37,7 @@ const routes = [
     { path: '/post', component: PostsIndex },
     { path: '/post-form', component: PostForm },
 
-    { path: '*', component: Welcome },
+    { path: '*',  redirect: '/' },
 ]
 
 const router = new VueRouter({
