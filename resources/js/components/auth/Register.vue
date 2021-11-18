@@ -28,8 +28,6 @@
 
 <script>
 
-  import axios from "axios";
-
   export default {
       name: "register",
       data() {
@@ -42,28 +40,33 @@
         };
       },
       methods: {
-        register() {
-          // Send a POST request
-          axios({
-            method: 'POST',
-            url: '/register',
-            data: {
-              firstName: this.firstName,
-              lastName: this.lastName,
-              email: this.email,
-              password: this.password,
-              confirmPassword: this.confirmPassword,
-            }
-          }).then(function (response) {
-            let responseData = response.data;
-            if ( "error" === responseData.status ){
-              alert(responseData.message);
-            } else if ("success" === responseData.status) {
-              alert(responseData.message)
-              window.location.href = '/home'
-            }
-          });
-          this.clearForm();
+        // Done with Fetch method just for example.
+        async register() {
+          const {firstName, lastName, email, password, confirmPassword } = this;
+          const res = await fetch(
+              "/register",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                  firstName,
+                  lastName,
+                  email,
+                  password,
+                  confirmPassword
+                })
+              }
+          );
+          const responseData = await res.json();
+          if ( "error" === responseData.status ){
+            alert(responseData.message);
+          } else if ("success" === responseData.status) {
+            alert(responseData.message)
+            await this.$router.push('/home');
+            this.clearForm();
+          }
         },
 
         clearForm() {
