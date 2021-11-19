@@ -2325,9 +2325,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   } else if ("success" === responseData.status) {
                     alert(responseData.message);
 
-                    _this.$store.commit('setToken', JSON.parse(responseData.data).Bearer);
+                    _this.$store.dispatch('setToken', JSON.parse(responseData.data).Bearer);
 
-                    _this.$store.commit('login', true);
+                    _this.$store.dispatch('login', true);
 
                     _this.redirect();
                   }
@@ -2726,8 +2726,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     logout: function logout() {
-      this.$store.state.loggedIn = false;
-      this.$store.state.token = '';
+      this.$store.dispatch('setToken', '');
+      this.$store.dispatch('login', false);
       this.redirect();
     },
     redirect: function redirect() {
@@ -21974,11 +21974,21 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     token: ''
   },
   mutations: {
-    login: function login(state, value) {
-      state.loggedIn = value;
+    LOGIN: function LOGIN(state, payload) {
+      state.loggedIn = payload;
     },
-    setToken: function setToken(state, value) {
-      state.token = value;
+    SET_TOKEN: function SET_TOKEN(state, payload) {
+      state.token = payload;
+    }
+  },
+  actions: {
+    login: function login(_ref, payload) {
+      var commit = _ref.commit;
+      commit('LOGIN', payload);
+    },
+    setToken: function setToken(_ref2, payload) {
+      var commit = _ref2.commit;
+      commit('SET_TOKEN', payload);
     }
   }
 });

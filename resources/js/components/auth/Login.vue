@@ -44,8 +44,8 @@ export default {
           alert(responseData.message);
         } else if ("success" === responseData.status) {
           alert(responseData.message);
-          this.$store.commit('setToken', JSON.parse(responseData.data).Bearer );
-          this.$store.commit('login', true);
+          this.$store.dispatch('setToken', JSON.parse(responseData.data).Bearer)
+          this.$store.dispatch('login', true)
           this.redirect();
         }
       });

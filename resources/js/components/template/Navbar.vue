@@ -54,8 +54,8 @@
     },
     methods:{
       logout() {
-        this.$store.state.loggedIn = false;
-        this.$store.state.token = '';
+        this.$store.dispatch('setToken', '')
+        this.$store.dispatch('login', false)
         this.redirect();
       },
       redirect() {

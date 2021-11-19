@@ -18,11 +18,19 @@ const store = new Vuex.Store({
         token: '',
     },
     mutations: {
-        login(state, value) {
-            state.loggedIn = value;
+        LOGIN: (state, payload) => {
+            state.loggedIn = payload;
         },
-        setToken(state, value) {
-            state.token = value;
+        SET_TOKEN: (state, payload) => {
+            state.token = payload;
+        }
+    },
+    actions: {
+        login: ({ commit }, payload) => {
+            commit('LOGIN', payload)
+        },
+        setToken: ({ commit }, payload) => {
+            commit('SET_TOKEN', payload)
         }
     }
 })
