@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Support\Auth;
-use Slim\Views\PhpRenderer;
 
 class LoginController
 {

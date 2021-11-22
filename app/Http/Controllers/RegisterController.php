@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Models\User;
 use App\Support\Auth;
 use Psr\Http\Message\ResponseInterface as Response;
-use Slim\Views\PhpRenderer;
 
 class RegisterController
 {
