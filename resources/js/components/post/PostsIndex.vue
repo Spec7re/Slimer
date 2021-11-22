@@ -19,6 +19,7 @@
               <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
           </div>
+          <!-- TODO pagination component -->
         </template>
       </div>
     </main>
@@ -72,7 +73,7 @@
         method: 'GET',
         headers: headers,
       }).then( response => (
-              this.posts = response.data
+            this.posts = response.data.data
           )).finally(() => this.loading = false)
     }
   }

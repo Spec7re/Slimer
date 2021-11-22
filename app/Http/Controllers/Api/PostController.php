@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Models\Post;
+use Illuminate\Support\Facades\DB;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Views\PhpRenderer;
 
@@ -66,7 +67,7 @@ class PostController
 
     public function getPosts($request, $response) : Response
     {
-        $posts = Post::latest('created_at')->get();
+        $posts = Post::latest('created_at')->paginate(5);
 
         $response->getBody()->write(json_encode($posts, JSON_PRETTY_PRINT));
 
