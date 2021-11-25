@@ -11,6 +11,7 @@
         <div class="text-center" v-if="loading">
           <h1>LOADING POSTS</h1>
         </div>
+        <!-- Posts -->
         <template v-for="post in posts">
           <div style="margin-top: 5px; margin-bottom: 5px;" class="card">
             <div class="card-body">
@@ -19,8 +20,47 @@
               <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
           </div>
-          <!-- TODO pagination component -->
         </template>
+        <!-- Pagination -->
+        <div class="text-center" v-if="allPages">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item"><a class="page-link" @click="previousPage">Previous</a></li>
+              <li class="page-item" v-for="page in allPages">
+                <a class="page-link" @click="changePage(page)" >{{ page }}</a>
+                <router-link :to="{ query: { page: page }}" class="page-link">{{ page }}</router-link>
+              </li>
+              <li class="page-item"><a class="page-link" @click="nextPage">Next</a></li>
+            </ul>
+          </nav>
+        </div>
+
+<!--        <div class="card text-center m-3">-->
+<!--          <h3 class="card-header">Vue.js + Node - Server Side Pagination Example</h3>-->
+<!--          <div class="card-body">-->
+<!--            <div v-for="item in pageOfItems" :key="item.id">{{item.name}}</div>-->
+<!--          </div>-->
+<!--          <div class="card-footer pb-0 pt-3">-->
+<!--            <ul v-if="pager.pages && pager.pages.length" class="pagination">-->
+<!--              <li :class="{'disabled':pager.currentPage === 1}" class="page-item first-item">-->
+<!--                <router-link :to="{ query: { page: 1 }}" class="page-link">First</router-link>-->
+<!--              </li>-->
+<!--              <li :class="{'disabled':pager.currentPage === 1}" class="page-item previous-item">-->
+<!--                <router-link :to="{ query: { page: pager.currentPage - 1 }}" class="page-link">Previous</router-link>-->
+<!--              </li>-->
+<!--              <li v-for="page in pager.pages" :key="page" :class="{'active':pager.currentPage === page}" class="page-item number-item">-->
+<!--                <router-link :to="{ query: { page: page }}" class="page-link">{{page}}</router-link>-->
+<!--              </li>-->
+<!--              <li :class="{'disabled':pager.currentPage === pager.totalPages}" class="page-item next-item">-->
+<!--                <router-link :to="{ query: { page: pager.currentPage + 1 }}" class="page-link">Next</router-link>-->
+<!--              </li>-->
+<!--              <li :class="{'disabled':pager.currentPage === pager.totalPages}" class="page-item last-item">-->
+<!--                <router-link :to="{ query: { page: pager.totalPages }}" class="page-link">Last</router-link>-->
+<!--              </li>-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--        </div>-->
+
       </div>
     </main>
   </div>
@@ -35,6 +75,8 @@
       data() {
         return {
           loading: true,
+          allPages: 0,
+          currentPage: 1,
           posts:[
               {
                 id: 1,
@@ -58,6 +100,35 @@
     methods:{
       redirect() {
         this.$router.push('/post-form');
+      },
+      changePage(page) {
+        this.currentPage = page;
+        let token = this.$store.state.token;
+
+        const headers = {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        }
+
+        axios({
+          url: "/api/get-posts?page=" + page,
+          method: 'GET',
+          headers: headers,
+        }).then(response => (
+            console.log(response),
+        this.posts = response.data.data
+        )).finally(() => this.loading = false)
+
+
+        console.log('PAGE',this.currentPage);
+      },
+      previousPage() {
+        this.currentPage = this.currentPage > 1  ?  this.currentPage - 1 : this.currentPage;
+        console.log(this.currentPage)
+      },
+      nextPage() {
+        this.currentPage = this.currentPage < this.allPages ?  this.currentPage + 1 : this.currentPage;
+        console.log(this.currentPage);
       }
     },
     created() {
@@ -69,13 +140,34 @@
       }
 
       axios({
-        url: "/api/get-posts",
+        url: "/api/get-posts?page="+this.currentPage,
         method: 'GET',
         headers: headers,
       }).then( response => (
-            this.posts = response.data.data
-          )).finally(() => this.loading = false)
+          this.allPages = response.data.last_page,
+          this.currentPage = response.data.current_page,
+          this.posts = response.data.data
+        )).finally(() => this.loading = false)
+    },
+
+    watch: {
+      '$route.query.page': {
+        immediate: true,
+        handler(page) {
+          page = parseInt(page) || 1;
+          if (page !== this.currentPage) {
+            axios({
+              url: '/api/get-posts?page='+page,
+              method: 'GET',
+            }).then( response => (
+                console.log(response)
+                // this.posts = response.data.data
+            )).finally(() => this.loading = false)
+          }
+        }
+      }
     }
+
   }
 </script>
 

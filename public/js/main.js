@@ -2607,12 +2607,54 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostsIndex.vue",
   data: function data() {
     return {
       loading: true,
+      allPages: 0,
+      currentPage: 1,
       posts: [{
         id: 1,
         user_id: 2,
@@ -2640,10 +2682,38 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     redirect: function redirect() {
       this.$router.push('/post-form');
+    },
+    changePage: function changePage(page) {
+      var _this = this;
+
+      this.currentPage = page;
+      var token = this.$store.state.token;
+      var headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        url: "/api/get-posts?page=" + page,
+        method: 'GET',
+        headers: headers
+      }).then(function (response) {
+        return console.log(response), _this.posts = response.data.data;
+      })["finally"](function () {
+        return _this.loading = false;
+      });
+      console.log('PAGE', this.currentPage);
+    },
+    previousPage: function previousPage() {
+      this.currentPage = this.currentPage > 1 ? this.currentPage - 1 : this.currentPage;
+      console.log(this.currentPage);
+    },
+    nextPage: function nextPage() {
+      this.currentPage = this.currentPage < this.allPages ? this.currentPage + 1 : this.currentPage;
+      console.log(this.currentPage);
     }
   },
   created: function created() {
-    var _this = this;
+    var _this2 = this;
 
     var token = this.$store.state.token;
     var headers = {
@@ -2651,14 +2721,36 @@ __webpack_require__.r(__webpack_exports__);
       'Authorization': 'Bearer ' + token
     };
     axios__WEBPACK_IMPORTED_MODULE_0___default()({
-      url: "/api/get-posts",
+      url: "/api/get-posts?page=" + this.currentPage,
       method: 'GET',
       headers: headers
     }).then(function (response) {
-      return _this.posts = response.data.data;
+      return _this2.allPages = response.data.last_page, _this2.currentPage = response.data.current_page, _this2.posts = response.data.data;
     })["finally"](function () {
-      return _this.loading = false;
+      return _this2.loading = false;
     });
+  },
+  watch: {
+    '$route.query.page': {
+      immediate: true,
+      handler: function handler(page) {
+        var _this3 = this;
+
+        page = parseInt(page) || 1;
+
+        if (page !== this.currentPage) {
+          axios__WEBPACK_IMPORTED_MODULE_0___default()({
+            url: '/api/get-posts?page=' + page,
+            method: 'GET'
+          }).then(function (response) {
+            return console.log(response) // this.posts = response.data.data
+            ;
+          })["finally"](function () {
+            return _this3.loading = false;
+          });
+        }
+      }
+    }
   }
 });
 
@@ -4587,7 +4679,77 @@ var render = function() {
                 ]
               )
             ]
-          })
+          }),
+          _vm._v(" "),
+          _vm.allPages
+            ? _c("div", { staticClass: "text-center" }, [
+                _c(
+                  "nav",
+                  { attrs: { "aria-label": "Page navigation example" } },
+                  [
+                    _c(
+                      "ul",
+                      { staticClass: "pagination" },
+                      [
+                        _c("li", { staticClass: "page-item" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "page-link",
+                              on: { click: _vm.previousPage }
+                            },
+                            [_vm._v("Previous")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.allPages, function(page) {
+                          return _c(
+                            "li",
+                            { staticClass: "page-item" },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "page-link",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.changePage(page)
+                                    }
+                                  }
+                                },
+                                [_vm._v(_vm._s(page))]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass: "page-link",
+                                  attrs: { to: { query: { page: page } } }
+                                },
+                                [_vm._v(_vm._s(page))]
+                              )
+                            ],
+                            1
+                          )
+                        }),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "page-item" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "page-link",
+                              on: { click: _vm.nextPage }
+                            },
+                            [_vm._v("Next")]
+                          )
+                        ])
+                      ],
+                      2
+                    )
+                  ]
+                )
+              ])
+            : _vm._e()
         ],
         2
       )
