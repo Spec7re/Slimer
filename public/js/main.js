@@ -22013,6 +22013,9 @@ var routes = [{
   path: '/post-form',
   component: _components_post_PostForm__WEBPACK_IMPORTED_MODULE_9__["default"]
 }, {
+  path: '/logout',
+  redirect: '/'
+}, {
   path: '*',
   redirect: '/'
 }];

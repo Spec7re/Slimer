@@ -44,6 +44,7 @@ const routes = [
     { path: '/home', component: Dashboard },
     { path: '/post', component: PostsIndex },
     { path: '/post-form', component: PostForm },
+    { path: '/logout', redirect: '/' },
 
     { path: '*',  redirect: '/' },
 ]
