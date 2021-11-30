@@ -65,7 +65,7 @@ class PostController
 
     public function getPosts($request, $response) : Response
     {
-        $posts = Post::latest('created_at')->paginate(5);
+        $posts = Post::latest('created_at')->paginate(5, ['*'], 'page', $_GET['page']);
 
         $response->getBody()->write(json_encode($posts, JSON_PRETTY_PRINT));
 
