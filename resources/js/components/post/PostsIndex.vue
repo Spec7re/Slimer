@@ -25,11 +25,13 @@
         <div class="text-center" v-if="allPages">
           <nav aria-label="Page navigation example">
             <ul class="pagination">
+              <li class="page-item"><a class="page-link" @click="changePage(1)">First</a></li>
               <li class="page-item"><a class="page-link" @click="previousPage">Previous</a></li>
               <li class="page-item" v-for="page in allPages">
                 <a class="page-link" @click="changePage(page)" >{{ page }}</a>
               </li>
               <li class="page-item"><a class="page-link" @click="nextPage">Next</a></li>
+              <li class="page-item"><a class="page-link" @click="changePage(allPages)">Last</a></li>
             </ul>
           </nav>
         </div>
@@ -79,11 +81,11 @@
       },
       previousPage() {
         this.currentPage = this.currentPage > 1  ?  this.currentPage - 1 : this.currentPage;
-        console.log(this.currentPage)
+        this.changePage(this.currentPage)
       },
       nextPage() {
         this.currentPage = this.currentPage < this.allPages ?  this.currentPage + 1 : this.currentPage;
-        console.log(this.currentPage);
+        this.changePage(this.currentPage)
       },
       getPosts(page) {
         let token = this.$store.state.token;
