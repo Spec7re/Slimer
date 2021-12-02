@@ -4631,74 +4631,113 @@ var render = function() {
                       "ul",
                       { staticClass: "pagination" },
                       [
-                        _c("li", { staticClass: "page-item" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "page-link",
-                              on: {
-                                click: function($event) {
-                                  return _vm.changePage(1)
-                                }
-                              }
-                            },
-                            [_vm._v("First")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "page-item" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "page-link",
-                              on: { click: _vm.previousPage }
-                            },
-                            [_vm._v("Previous")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _vm._l(_vm.allPages, function(page) {
-                          return _c("li", { staticClass: "page-item" }, [
+                        _c(
+                          "li",
+                          {
+                            staticClass: "page-item",
+                            class: { disabled: _vm.currentPage === 1 }
+                          },
+                          [
                             _c(
                               "a",
                               {
                                 staticClass: "page-link",
                                 on: {
                                   click: function($event) {
-                                    return _vm.changePage(page)
+                                    return _vm.changePage(1)
                                   }
                                 }
                               },
-                              [_vm._v(_vm._s(page))]
+                              [_vm._v("First")]
                             )
-                          ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "li",
+                          {
+                            staticClass: "page-item",
+                            class: { disabled: _vm.currentPage === 1 }
+                          },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "page-link",
+                                on: { click: _vm.previousPage }
+                              },
+                              [_vm._v("Previous")]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.allPages, function(page) {
+                          return _c(
+                            "li",
+                            {
+                              staticClass: "page-item",
+                              class: { active: _vm.currentPage === page }
+                            },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "page-link",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.changePage(page)
+                                    }
+                                  }
+                                },
+                                [_vm._v(_vm._s(page))]
+                              )
+                            ]
+                          )
                         }),
                         _vm._v(" "),
-                        _c("li", { staticClass: "page-item" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "page-link",
-                              on: { click: _vm.nextPage }
-                            },
-                            [_vm._v("Next")]
-                          )
-                        ]),
+                        _c(
+                          "li",
+                          {
+                            staticClass: "page-item",
+                            class: {
+                              disabled: _vm.currentPage === _vm.allPages
+                            }
+                          },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "page-link",
+                                on: { click: _vm.nextPage }
+                              },
+                              [_vm._v("Next")]
+                            )
+                          ]
+                        ),
                         _vm._v(" "),
-                        _c("li", { staticClass: "page-item" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "page-link",
-                              on: {
-                                click: function($event) {
-                                  return _vm.changePage(_vm.allPages)
+                        _c(
+                          "li",
+                          {
+                            staticClass: "page-item",
+                            class: {
+                              disabled: _vm.currentPage === _vm.allPages
+                            }
+                          },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "page-link",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.changePage(_vm.allPages)
+                                  }
                                 }
-                              }
-                            },
-                            [_vm._v("Last")]
-                          )
-                        ])
+                              },
+                              [_vm._v("Last")]
+                            )
+                          ]
+                        )
                       ],
                       2
                     )
