@@ -8,4 +8,4 @@ Route::get('/example', 'Api\ApiController@index');
 
 // Post routes
 Route::post('/post', 'Api\PostController@store')->add(ApiAuthentication::class);
-Route::get('/get-posts', 'Api\PostController@getPosts');
+Route::get('/get-posts', 'Api\PostController@getPosts')->add(ApiAuthentication::class);

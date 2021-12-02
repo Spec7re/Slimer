@@ -27,7 +27,7 @@
             <ul class="pagination">
               <li class="page-item"><a class="page-link" @click="changePage(1)">First</a></li>
               <li class="page-item"><a class="page-link" @click="previousPage">Previous</a></li>
-              <li class="page-item" v-for="page in allPages">
+              <li class="page-item" v-bind:class="{ 'active': currentPage === page }" v-for="page in allPages">
                 <a class="page-link" @click="changePage(page)" >{{ page }}</a>
               </li>
               <li class="page-item"><a class="page-link" @click="nextPage">Next</a></li>
