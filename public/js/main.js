@@ -2619,6 +2619,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostsIndex.vue",
@@ -2661,11 +2663,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     previousPage: function previousPage() {
       this.currentPage = this.currentPage > 1 ? this.currentPage - 1 : this.currentPage;
-      console.log(this.currentPage);
+      this.changePage(this.currentPage);
     },
     nextPage: function nextPage() {
       this.currentPage = this.currentPage < this.allPages ? this.currentPage + 1 : this.currentPage;
-      console.log(this.currentPage);
+      this.changePage(this.currentPage);
     },
     getPosts: function getPosts(page) {
       var _this = this;
@@ -4634,6 +4636,21 @@ var render = function() {
                             "a",
                             {
                               staticClass: "page-link",
+                              on: {
+                                click: function($event) {
+                                  return _vm.changePage(1)
+                                }
+                              }
+                            },
+                            [_vm._v("First")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "page-item" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "page-link",
                               on: { click: _vm.previousPage }
                             },
                             [_vm._v("Previous")]
@@ -4665,6 +4682,21 @@ var render = function() {
                               on: { click: _vm.nextPage }
                             },
                             [_vm._v("Next")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "page-item" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "page-link",
+                              on: {
+                                click: function($event) {
+                                  return _vm.changePage(_vm.allPages)
+                                }
+                              }
+                            },
+                            [_vm._v("Last")]
                           )
                         ])
                       ],
