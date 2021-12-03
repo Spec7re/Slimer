@@ -2248,6 +2248,11 @@ __webpack_require__.r(__webpack_exports__);
     redirect: function redirect() {
       this.$router.push("/register");
     }
+  },
+  computed: {
+    loggedIn: function loggedIn() {
+      return this.$store.state.loggedIn;
+    }
   }
 });
 
@@ -4084,18 +4089,20 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "text-center" }, [
-        _c("p", { staticClass: "lead" }, [
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-lg btn-secondary",
-              on: { click: _vm.redirect }
-            },
-            [_vm._v("REGISTER")]
-          )
-        ])
-      ])
+      !_vm.loggedIn
+        ? _c("div", { staticClass: "text-center" }, [
+            _c("p", { staticClass: "lead" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-lg btn-secondary",
+                  on: { click: _vm.redirect }
+                },
+                [_vm._v("REGISTER")]
+              )
+            ])
+          ])
+        : _vm._e()
     ]
   )
 }
