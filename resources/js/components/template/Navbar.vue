@@ -8,7 +8,7 @@
       <ul class="nav nav-pills">
         <template v-if="!loggedIn">
           <li>
-            <router-link to="/login"  >
+            <router-link to="/login">
               <button class='nav-link' active-link="active">
                 Login
               </button>
@@ -54,8 +54,8 @@
     },
     methods:{
       logout() {
-        this.$store.dispatch('setToken', '')
-        this.$store.dispatch('login', false)
+        sessionStorage.clear();
+        this.$store.dispatch('login')
         this.redirect();
       },
       redirect() {

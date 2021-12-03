@@ -14,24 +14,18 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state: {
-        loggedIn: false,
-        token: '',
+        loggedIn: !! sessionStorage.getItem('token'),
+        token: sessionStorage.getItem('token'),
     },
     mutations: {
-        LOGIN: (state, payload) => {
-            state.loggedIn = payload;
+        LOGIN: (state) => {
+            state.loggedIn = !! sessionStorage.getItem('token');
         },
-        SET_TOKEN: (state, payload) => {
-            state.token = payload;
-        }
     },
     actions: {
-        login: ({ commit }, payload) => {
-            commit('LOGIN', payload)
+        login: ({ commit }) => {
+            commit('LOGIN')
         },
-        setToken: ({ commit }, payload) => {
-            commit('SET_TOKEN', payload)
-        }
     }
 })
 

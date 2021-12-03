@@ -2324,10 +2324,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     alert(responseData.message);
                   } else if ("success" === responseData.status) {
                     alert(responseData.message);
+                    sessionStorage.setItem('token', JSON.parse(responseData.data).Bearer);
 
-                    _this.$store.dispatch('setToken', JSON.parse(responseData.data).Bearer);
-
-                    _this.$store.dispatch('login', true);
+                    _this.$store.dispatch('login');
 
                     _this.redirect();
                   }
@@ -2758,8 +2757,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     logout: function logout() {
-      this.$store.dispatch('setToken', '');
-      this.$store.dispatch('login', false);
+      sessionStorage.clear();
+      this.$store.dispatch('login');
       this.redirect();
     },
     redirect: function redirect() {
@@ -22127,25 +22126,18 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
-    loggedIn: false,
-    token: ''
+    loggedIn: !!sessionStorage.getItem('token'),
+    token: sessionStorage.getItem('token')
   },
   mutations: {
-    LOGIN: function LOGIN(state, payload) {
-      state.loggedIn = payload;
-    },
-    SET_TOKEN: function SET_TOKEN(state, payload) {
-      state.token = payload;
+    LOGIN: function LOGIN(state) {
+      state.loggedIn = !!sessionStorage.getItem('token');
     }
   },
   actions: {
-    login: function login(_ref, payload) {
+    login: function login(_ref) {
       var commit = _ref.commit;
-      commit('LOGIN', payload);
-    },
-    setToken: function setToken(_ref2, payload) {
-      var commit = _ref2.commit;
-      commit('SET_TOKEN', payload);
+      commit('LOGIN');
     }
   }
 });

@@ -44,8 +44,8 @@ export default {
           alert(responseData.message);
         } else if ("success" === responseData.status) {
           alert(responseData.message);
-          this.$store.dispatch('setToken', JSON.parse(responseData.data).Bearer)
-          this.$store.dispatch('login', true)
+          sessionStorage.setItem('token', JSON.parse(responseData.data).Bearer);
+          this.$store.dispatch('login')
           this.redirect();
         }
       });
