@@ -107,8 +107,7 @@
       }
     },
     created() {
-      let page = this.currentPage ? this.currentPage : 1;
-      this.getPosts(page);
+      this.getPosts(this.currentPage);
     },
   }
 </script>

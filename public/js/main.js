@@ -2689,8 +2689,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    var page = this.currentPage ? this.currentPage : 1;
-    this.getPosts(page);
+    this.getPosts(this.currentPage);
   }
 });
 
